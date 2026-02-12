@@ -11,9 +11,11 @@ private val LightColorScheme = lightColorScheme(
     secondary = darkBlue,
     onSecondary = whiteTextLight,
     background = background,
+    onBackground = grayText,
     surfaceVariant = green,
     onSurfaceVariant = whiteTextLight,
-    error = orange
+    error = orange,
+    onError = whiteTextLight
 )
 
 @Composable
