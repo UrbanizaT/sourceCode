@@ -2,12 +2,25 @@ package com.example.urbanizat.ui.components.forms
 
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.urbanizat.ui.theme.UrbanizaTTheme
 import com.example.urbanizat.utils.ROUNDED_CORNERS
@@ -18,10 +31,14 @@ fun InputCustom(
     onValueChange: (String) -> Unit,
     label: String,
     placeholder: @Composable (() -> Unit)? = null,
+    maxLines: Int = 1,
     isError: Boolean,
     supportingText: @Composable (() -> Unit)? = null,
+    isPassword: Boolean = false,
+    passwordVisible: Boolean = false,
+    onTogglePasswordVisibility: (() -> Unit)? = null
 ) {
-    Column() {
+    Column{
         Text(
             text = label,
             color = MaterialTheme.colorScheme.onSecondary
@@ -32,6 +49,12 @@ fun InputCustom(
             placeholder = placeholder,
             isError = isError,
             supportingText = supportingText,
+            visualTransformation = if (isPassword && !passwordVisible) {
+                PasswordVisualTransformation()
+            } else {
+                VisualTransformation.None
+            },
+            maxLines = maxLines,
             colors = TextFieldDefaults.colors(
                 // === ESTADO NORMAL (NO ERROR) ===
                 // Fondo del input (estado normal)
@@ -41,9 +64,15 @@ fun InputCustom(
                 // Texto dentro del input
                 focusedTextColor = MaterialTheme.colorScheme.onBackground,
                 unfocusedTextColor = MaterialTheme.colorScheme.onBackground,
+                focusedPlaceholderColor = MaterialTheme.colorScheme.onBackground,
+                unfocusedPlaceholderColor = MaterialTheme.colorScheme.onBackground,
 
                 // Cursor
                 cursorColor = MaterialTheme.colorScheme.primary,
+
+                //Icon
+                focusedTrailingIconColor = MaterialTheme.colorScheme.onBackground,
+                unfocusedTrailingIconColor = MaterialTheme.colorScheme.onBackground,
 
                 // === ESTADO DE ERROR ===
                 errorTextColor = MaterialTheme.colorScheme.onError,
@@ -52,7 +81,25 @@ fun InputCustom(
                 errorCursorColor = MaterialTheme.colorScheme.error,
                 errorSupportingTextColor = MaterialTheme.colorScheme.error
             ),
+            trailingIcon = if (isPassword && onTogglePasswordVisibility != null) {
+                {
+                    IconButton(onClick = onTogglePasswordVisibility) {
+                        Icon(
+                            imageVector = if (passwordVisible) {
+                                Icons.Default.Visibility
+                            } else {
+                                Icons.Default.VisibilityOff
+                            },
+                            contentDescription = if (passwordVisible)
+                                "Ocultar contraseña"
+                            else
+                                "Mostrar contraseña"
+                        )
+                    }
+                }
+            } else null,
             shape = RoundedCornerShape(ROUNDED_CORNERS),
+            modifier = Modifier.fillMaxWidth(0.9f)
         )
     }
 }
@@ -61,13 +108,20 @@ fun InputCustom(
 @Composable
 fun InputCustomPreview() {
     UrbanizaTTheme {
+
+        var visible by remember { mutableStateOf(false) }
+        var text by remember { mutableStateOf("") }
+
         InputCustom(
-            value = "text",
-            onValueChange = {},
+            value = text,
+            onValueChange = { text = it},
             label = "Introduce tu nombre",
             placeholder = { Text(text = "placeholder") },
             isError = false,
-            supportingText = null
+            supportingText = null,
+            isPassword = true,
+            passwordVisible = visible,
+            onTogglePasswordVisibility = { visible = !visible }
         )
     }
 }
