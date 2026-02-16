@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.withLink
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -94,7 +95,8 @@ fun RegisterScreen() {
                 label = "Nombre y apellidos",
                 placeholder = { Text(text = "Ejemplo: Manolo López") },
                 isError = false, //TODO: add viewModel logic
-                supportingText = null //TODO: add viewModel logic
+                supportingText = null, //TODO: add viewModel logic
+                keyboardType = KeyboardType.Text
             )
             InputCustom(
                 value = "manolo@gmail.com", //TODO: add viewModel logic
@@ -102,7 +104,8 @@ fun RegisterScreen() {
                 label = "E-mail",
                 placeholder = { Text(text = "Ejemplo: Manolo López") },
                 isError = false, //TODO: add viewModel logic
-                supportingText = null //TODO: add viewModel logic
+                supportingText = null, //TODO: add viewModel logic
+                keyboardType = KeyboardType.Email
             )
             InputCustom(
                 value = "", //TODO: add viewModel logic
@@ -113,7 +116,8 @@ fun RegisterScreen() {
                 supportingText = null, //TODO: add viewModel logic
                 isPassword = true,
                 passwordVisible = true,
-                onTogglePasswordVisibility = {}
+                onTogglePasswordVisibility = {},
+                keyboardType = KeyboardType.Password
             )
             InputCustom(
                 value = "COD_3565458A", //TODO: add viewModel logic
@@ -121,7 +125,8 @@ fun RegisterScreen() {
                 label = "Código de comunidad",
                 placeholder = { Text(text = "Ejemplo: COM_156324A") },
                 isError = false, //TODO: add viewModel logic
-                supportingText = null //TODO: add viewModel logic
+                supportingText = null, //TODO: add viewModel logic
+                keyboardType = KeyboardType.Password
             )
             InputCheckbox(
                 modifier = Modifier.fillMaxWidth(0.9f),
