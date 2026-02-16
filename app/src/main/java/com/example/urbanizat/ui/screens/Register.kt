@@ -29,14 +29,9 @@ import com.example.urbanizat.utils.SPACER_HEIGHT
 @Composable
 fun RegisterScreen() {
     MainColumn() {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth(0.8f)
-        ) {
-            FormHeader(
-                label = "Crear una cuenta"
-            )
-        }
+        FormHeader(
+            label = "Crear una cuenta"
+        )
         Spacer(modifier = Modifier.height(SPACER_HEIGHT))
 
         FormBody() {
