@@ -25,7 +25,9 @@ import com.example.urbanizat.utils.LinkStyles
 import com.example.urbanizat.utils.SPACER_HEIGHT
 
 @Composable
-fun LoginScreen(){
+fun LoginScreen(
+    onNavigateToRegister: () -> Unit
+){
     MainColumn{
         FormHeader(
             label = "Iniciar sesión"
@@ -58,7 +60,7 @@ fun LoginScreen(){
                             tag = "register",
                             styles = LinkStyles.primary()
                         ) {
-                            //TODO: añadir link de navegación
+                            onNavigateToRegister()
                         }
                     ) {
                         append("crear usuario")
@@ -82,6 +84,8 @@ fun LoginScreen(){
 @Composable
 fun LoginScreenPreview(){
     UrbanizaTTheme {
-        LoginScreen()
+        LoginScreen(
+            onNavigateToRegister = {}
+        )
     }
 }
