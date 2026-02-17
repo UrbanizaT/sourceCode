@@ -26,14 +26,17 @@ import com.example.urbanizat.utils.LinkStyles
 import com.example.urbanizat.utils.SPACER_HEIGHT
 
 @Composable
-fun RegisterScreen() {
-    MainColumn() {
+fun RegisterScreen(
+    onNavigateToLogin: () -> Unit,
+    onNavigateToTerms: () -> Unit
+) {
+    MainColumn {
         FormHeader(
             label = "Crear una cuenta"
         )
         Spacer(modifier = Modifier.height(SPACER_HEIGHT))
 
-        FormBody() {
+        FormBody {
             InputCustom(
                 value = "Manolo", //TODO: add viewModel logic
                 onValueChange = {}, //TODO: add viewModel logic
@@ -86,7 +89,7 @@ fun RegisterScreen() {
                                 tag = "terminos y condiciones",
                                 styles = LinkStyles.primary()
                             ) {
-                                //TODO: añadir link de navegación
+                                onNavigateToTerms()
                             }
                         ) {
                             append("términos y condiciones")
@@ -103,7 +106,7 @@ fun RegisterScreen() {
                             tag = "loggin",
                             styles = LinkStyles.primary()
                         ) {
-                            //TODO: añadir link de navegación
+                            onNavigateToLogin()
                         }
                     ) {
                         append("iniciar sesión")
@@ -127,6 +130,9 @@ fun RegisterScreen() {
 @Composable
 fun RegisterScreenPreview() {
     UrbanizaTTheme {
-        RegisterScreen()
+        RegisterScreen(
+            onNavigateToLogin = {},
+            onNavigateToTerms = {}
+        )
     }
 }
