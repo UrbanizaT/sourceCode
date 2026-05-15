@@ -6,6 +6,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.urbanizat.ui.screens.LoginScreen
 import com.example.urbanizat.ui.screens.RegisterScreen
+import com.example.urbanizat.ui.screens.TermsScreen
+import com.example.urbanizat.ui.MainAppNavHost
 
 @Composable
 fun AppNavHost() {
@@ -39,6 +41,18 @@ fun AppNavHost() {
                     navController.navigate(route= AppDestinations.Terms)
                 }
             )
+        }
+
+        composable<AppDestinations.Terms> {
+            TermsScreen(
+                onNavigateToMainApp = {
+                    navController.navigate(route = AppDestinations.MainApp)
+                }
+            )
+        }
+
+        composable<AppDestinations.MainApp> {
+            MainAppNavHost(navController = navController)
         }
     }
 }
