@@ -11,6 +11,12 @@
 Mediante una infraestructura escalable, centraliza reportes de averías, publicación de cuentas claras de forma anónima y la organización general vecinal.
 
 ---
+## Código de comunidad para pruebas
+
+Para registrarse como nuevo usuario, usar el siguiente código de comunidad:
+
+**Código:** `534354` (Comunidad: Loma Linda)
+
 
 ## ✨ Características Principales
 
